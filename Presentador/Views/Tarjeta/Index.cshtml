@@ -1,0 +1,64 @@
+﻿@model IEnumerable<Entidades.Tarjeta>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Billetera!!!</h2>
+
+<p>
+    @Html.ActionLink("Agregar Nueva Tarjeta", "Create",null, htmlAttributes: new
+{
+    @class = "btn btn-success"
+})
+</p>
+<div class="row">
+    <div class="col-3 text-center">
+        <img src="" alt="cargando..." />
+        <h1>@ViewBag.usuario.nombre</h1>
+        <h1>@ViewBag.usuario.apellidoPaterno</h1>
+        <h1>@ViewBag.usuario.apellidoMaterno</h1>
+        
+        @Html.ActionLink("Editar Perfil", "Edit","Usuario", new { id = ViewBag.usuario.id }, new { @class = "btn btn-success"}) <br/><br />
+        @Html.ActionLink("Eliminar", "Delete", "Usuario", new { id = ViewBag.usuario.id },new { @class = "btn btn-danger" })<br /><br />
+        @Html.ActionLink("CerrarSesion", "CerrarSesion", "Login",null, new { @class = "btn btn-primary" })
+    </div>
+    <div class="col-9">
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                <div class="col-6 ">
+                    <div class="card shadow p-3 mb-5 bg-white rounded" style="width: 18rem;">
+                        <div class="card-body">
+                            <h5 class="card-title"> @Html.DisplayFor(modelItem => item.nombreTitular)</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">@Html.DisplayFor(modelItem => item.noTarjeta)</h6>
+                            <p class="card-text text-center">CCV: @Html.DisplayFor(modelItem => item.ccv)  Fecha: @Html.DisplayFor(modelItem => item.fecha)    </p>
+                            <h6 class="card-subtitle mb-2 text-muted">$100</h6>
+                            @Html.ActionLink("Editar", "Edit", new { id = item.id }, htmlAttributes: new
+                            {
+                                @class = "btn btn-warning"
+                            }) |
+                            @Html.ActionLink("Detalles", "Details", new { id = item.id }, htmlAttributes: new
+                        {
+                            @class = "btn btn-primary"
+                        }) |
+                            @Html.ActionLink("Eliminar", "Delete", new { id = item.id }, htmlAttributes: new
+                        {
+                            @class = "btn btn-danger"
+                        })
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+
+    </div>
+
+
+
+</div>
+
+
+
+
